@@ -14,7 +14,7 @@ gulp.task('built', function(){
 });
 
 gulp.task('wt', function(){
-	console.log("change");
+	// console.log("change");
 	gulp.watch("src/*.js",["built"]);
 	// gulp.src("test/index.js").pipe(livereload());
 });
