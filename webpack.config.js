@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var entiresPath = path.resolve(__dirname, 'examples');
 var entryList = {
-    vendors: [],
+    // vendors: [],
 };
 
 /**
