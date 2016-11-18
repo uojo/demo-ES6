@@ -45,3 +45,9 @@ function fn1(state){
 
 console.log( 4, fn1([{b:20}]) ); //[{a:10},{b:20}]
 console.log( 5, fn1([1,2]) ); //[{a:10},1,2]
+
+
+// 数组
+const arr1 = [{id:1,name:"hello"},{id:2,name:"world"}];
+arr1.map(it => console.log(it.name));
+let sum1 = arr1.reduce( (a,b) => a.id+b.id );
