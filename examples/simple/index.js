@@ -32,7 +32,6 @@ s.charCodeAt(1) // 57271
 
 }
 
-
 // ...拼接
 function fn1(state){
   return [
@@ -43,11 +42,30 @@ function fn1(state){
   ]
 };
 
-console.log( 4, fn1([{b:20}]) ); //[{a:10},{b:20}]
+let fn2 = (e) => {
+	
+	let a={a:1,b:2};
+	
+	return {
+		...a,
+		...e
+		
+	}
+}
+
+console.log( 4, fn1( [{b:20}] ) ); //[{a:10},{b:20}]
 console.log( 5, fn1([1,2]) ); //[{a:10},1,2]
+console.log( 6, fn2({a:10,c:3}) ); //[{a:10},1,2]
+
+
 
 
 // 数组
 const arr1 = [{id:1,name:"hello"},{id:2,name:"world"}];
 arr1.map(it => console.log(it.name));
 let sum1 = arr1.reduce( (a,b) => a.id+b.id );
+
+//extend
+console.log( Object.assign( {a:1,b:{c:1,d:2}}, {b:{e:3}} ) );
+
+
