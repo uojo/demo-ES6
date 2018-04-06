@@ -3,9 +3,8 @@
 
 ## Usage ##
 - npm run build 打包文件
-- npm run dev 启动 webpack 服务器，访问127.0.0.1:6006
+- npm start // 启动 webpack 服务器
 
 
 ## 参考 ##
-- org：
 - [http://es6.ruanyifeng.com/](http://es6.ruanyifeng.com/)

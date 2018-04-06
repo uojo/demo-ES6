@@ -1,69 +1,48 @@
-var path = require('path');
 var webpack = require('webpack');
-var fs = require('fs');
-
-var entiresPath = path.resolve(__dirname, 'examples');
-var entryList = {
-    // vendors: [],
-};
-
-/**
- * 循环获取入口文件
- * @param  {String} path 入口文件目录路径
- */
-
-(function walkEntry(entiresPath) {
-    var dirList = fs.readdirSync(entiresPath);
-    // console.log(dirList);
-    if( dirList.length ){
-        dirList.forEach(function(item){
-            var singleEntryPath = path.resolve(entiresPath, item, 'index.js');
-            try{
-                var stats = fs.statSync(singleEntryPath);
-
-                if( stats.isFile() ){
-                    // console.log(item, singleEntryPath);
-                    
-                    entryList[item] = [
-                        "webpack/hot/dev-server",
-                        singleEntryPath
-                    ];
-                }
-            } catch (err){
-                return false;
-            }
-        });
-    }
-})(entiresPath);
-console.log(entryList);
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: entryList,
-    output: {
-		publicPath: "dist/",
-        // path:path.join(__dirname, 'dist'),
-        filename: '[name].js'
-    },
+  mode:'development',
+  entry: {'index':'./src/index.js'},
+  output: {
+		publicPath: "/dist/",
+    // path:path.join(__dirname, 'dist'),
+    filename: '[name].js'
+  },
 	// 新添加的module属性
-    module: {
-        loaders: [
-            {
-                test:/\.js?$/,
-                exclude: /node_modules/,
-                loader: 'babel',
-                query:{
-                    presets:['es2015','stage-1']
-                }
-            }
-        ]
-    },
-    plugins: [
-		// 将公共部分抽成
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+  /* module: {
+    rules: [
+      {
+        test:/\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        options:{
+          // presets:['es2015','stage-1']
+        }
+      }
+    ]
+  }, */
+  plugins: [
+    new HtmlWebpackPlugin({
+      // 生成文件 {output.path}/{filename}
+      filename: 'index.html',
+      template: './src/index.tpl',
+      // 添加时间戳
+      hash:true,
+      // 把相应的资源注入到模板页中
+      inject:true
+    }),
+
 		new webpack.HotModuleReplacementPlugin()
-    ],
+  ],
 	devServer:{
 		inline:true,
-		hot:true
+    hot:true,
+    port:3000,
+    contentBase:'./',
+    openPage:'dist/index.html',
+    clientLogLevel:'none',
+    // noInfo: true,
+    // open:true
 	}
 };
