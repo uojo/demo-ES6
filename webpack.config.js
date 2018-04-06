@@ -10,18 +10,19 @@ module.exports = {
     filename: '[name].js'
   },
 	// 新添加的module属性
-  /* module: {
+  module: {
     rules: [
       {
         test:/\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         options:{
-          // presets:['es2015','stage-1']
+          presets:['env'],
+          plugins:['transform-es2015-spread', 'syntax-object-rest-spread']
         }
       }
     ]
-  }, */
+  },
   plugins: [
     new HtmlWebpackPlugin({
       // 生成文件 {output.path}/{filename}
