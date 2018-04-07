@@ -1,11 +1,17 @@
 const log = console.log;
+
+log(a); // undefind
+let a=1;
+log(a); // 1
+
 // let定义变量的作用域
 (function(){
-  let n = 5;
+  let a = 1,b = 2;
   if (true) {
-    let n = 10;
+    let a = 2;
+    b = 3;
   }
-  // log(n); // 5
+  log(a,b); // 1 3
 })();
 
 {{{{
