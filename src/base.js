@@ -1,6 +1,6 @@
 const log = console.log;
 
-log(a); // undefind
+log(a); // undefined
 let a=1;
 log(a); // 1
 
