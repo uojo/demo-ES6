@@ -1,5 +1,5 @@
 {
-  "name": "demo-ES6",
+  "name": "demo-es6",
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
@@ -18,5 +18,10 @@
     "dev": "webpack-dev-server"
   },
   "author": "uojo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-standard": "^3.1.0"
+  }
 }
