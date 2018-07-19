@@ -39,6 +39,7 @@ if (0) {
 // a 0 number [ 'a', 'b' ]
 // b 1 number [ 'a', 'b' ]
 
+// 每次返回 true, 则 el 被 push
 0 && log(d1.filter((v, i, arr) => v === 'a'))
 // ['a']
 

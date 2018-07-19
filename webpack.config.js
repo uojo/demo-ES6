@@ -1,24 +1,24 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode:'development',
-  entry: {'index':'./src/index.js'},
+  mode: 'development',
+  entry: {'index': './src/index.js'},
   output: {
-		publicPath: "/dist/",
+    publicPath: '/dist/',
     // path:path.join(__dirname, 'dist'),
     filename: '[name].js'
   },
-	// 新添加的module属性
+  // 新添加的module属性
   module: {
     rules: [
       {
-        test:/\.js?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options:{
-          presets:['env'],
-          plugins:['transform-es2015-spread', 'syntax-object-rest-spread']
+        options: {
+          presets: ['env'],
+          plugins: ['transform-es2015-spread', 'syntax-object-rest-spread']
         }
       }
     ]
@@ -29,21 +29,21 @@ module.exports = {
       filename: 'index.html',
       template: './src/index.tpl',
       // 添加时间戳
-      hash:true,
+      hash: true,
       // 把相应的资源注入到模板页中
-      inject:true
+      inject: true
     }),
 
-		new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
-	devServer:{
-		inline:true,
-    hot:true,
-    port:3000,
-    contentBase:'./',
-    openPage:'dist/index.html',
-    clientLogLevel:'none',
+  devServer: {
+    inline: true,
+    hot: true,
+    port: 3000,
+    contentBase: './',
+    openPage: 'dist/index.html',
+    clientLogLevel: 'none',
     // noInfo: true,
     // open:true
-	}
-};
+  }
+}
