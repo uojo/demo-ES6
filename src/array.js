@@ -7,6 +7,15 @@ const arr1 = [{id: 1, name: 'a'}, {id: 2, name: 'b'}]
 
 // log( arr1.reduce( (a,b) => a.id+b.id ) )
 // 3
+// 填充
+if (1) {
+  let a = Array(3)
+  let b = a.fill('').map((a, b, c) => {
+    // log(a, b, c)
+    return b
+  })
+  log(b)
+}
 
 // 遍历
 const d1 = ['a', 'b']
