@@ -8,8 +8,9 @@ const log = console.log
   log(v);
 } */
 
+// for in 可用于数组
 for (let i in {a: 1, b: 2}) {
-  log(i)
+  // log(i)
 }
 // a
 // b

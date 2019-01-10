@@ -19,7 +19,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: ['transform-es2015-spread', 'syntax-object-rest-spread']
+          plugins: ['transform-runtime', 'transform-es2015-spread', 'syntax-object-rest-spread', 'transform-async-to-generator']
         }
       }
     ]

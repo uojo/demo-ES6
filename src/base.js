@@ -1,8 +1,8 @@
 const log = console.log
 
-log(a) // undefined
-let a = 1
-log(a); // 1
+// log(a) // undefined
+let a = 1;
+// log(a); // 1
 
 // let定义变量的作用域
 (function () {
@@ -11,7 +11,7 @@ log(a); // 1
     let a = 2
     b = 3
   }
-  log(a, b) // 1 3
+  // log(a, b) // 1 3
 })()
 
 { { { {

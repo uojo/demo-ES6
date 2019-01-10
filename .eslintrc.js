@@ -2,7 +2,7 @@
 
 module.exports = {
   root: true,
-  // parser: 'babel-eslint',
+  parser: 'babel-eslint',
   parserOptions: {
     "ecmaVersion": 6,
     "sourceType": 'module'
@@ -23,5 +23,6 @@ module.exports = {
     // allow debugger during development
     // 'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'comma-dangle': ['error', 'only-multiline'],
+    'no-constant-condition':0
   }
 }
