@@ -1,4 +1,4 @@
-if (true) {
+if (false) {
   const timeout = (ms) => {
     return new Promise(resolve => {
       console.log(1)
