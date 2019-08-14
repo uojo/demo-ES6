@@ -8,3 +8,4 @@ s.charCodeAt(1) // 57271
 t2-git checkout-b
 t2-c1
 t1-git checkout -b
+t1-c1
