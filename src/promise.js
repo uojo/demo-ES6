@@ -1,3 +1,4 @@
+
 if (false) {
   const timeout = (ms) => {
     return new Promise(resolve => {
@@ -116,5 +117,43 @@ if (false) {
 
   }).catch(e => {
     console.log('e', e)
+  })
+}
+
+if (false) {
+  const p1 = Promise.resolve(1)
+    .then(e1 => {
+      // console.log('TCL: e1', e1)
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({notRealError: true})
+    })
+    .then(e2 => {
+      // console.log('TCL: e2', e2)
+    })
+    // eslint-disable-next-line handle-callback-err
+    .catch(err => {
+      // console.log('TCL: err', err)
+    })
+  // console.log('TCL: p1', p1.PromiseStatus)
+  // console.log('TCL: p1', p1.PromiseValue)
+}
+
+if (true) {
+  const p1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 500, 'hello')
+  })
+  const p2 = new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
+      setTimeout(reject, 100, new Error('fail...'))
+    }).catch(err => {
+      resolve(err)
+    })
+  })
+  Promise.all([p1, p2]).then(values => {
+    for (let val of values) {
+      console.log('TCL: val', typeof val)
+    }
+  }).catch(err => {
+    console.log('TCL: err', err)
   })
 }
