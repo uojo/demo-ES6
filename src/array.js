@@ -36,6 +36,7 @@ if (0) {
   // b
 }
 
+// 中断遍历，使用 return、 break、throw
 if (0) {
   for (let [n, i] of d1) {
     log(n, i)
