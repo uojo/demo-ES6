@@ -15,7 +15,13 @@ var zhang = new WhitePeople()
 
 /* 1、实例的原型链 */
 
+// 父类实例化
 // console.log(wang.__proto__ === Person.prototype, '实例的 __proto__ 指向构造其的类的原型对象')
+// console.log(Person.prototype.__proto__ === Object.prototype)
+// console.log(Object.prototype.__proto__ === null)
+// 子类实例化
+// console.log(zhang.__proto__ === WhitePeople.prototype, '实例的 __proto__ 指向构造其的类的原型对象')
+// console.log(WhitePeople.prototype.__proto__ === Person.prototype)
 // console.log(Person.prototype.__proto__ === Object.prototype)
 // console.log(Object.prototype.__proto__ === null)
 
@@ -26,6 +32,10 @@ var zhang = new WhitePeople()
 
 /* 3、函数的 prototype.constructor 指向函数本身 */
 // console.log(Person.prototype.constructor === Person)
+
+/* 链路 */
+// console.log(wang.constructor === Person)
+// console.log(Person.constructor === Function)
 
 /* 4、父类、子类的 constructor 均指向 Function */
 // console.log(WhitePeople.constructor === Function)

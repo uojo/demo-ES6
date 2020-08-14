@@ -35,10 +35,11 @@ if (0) {
   let c1 = new Cat('apple')
   // => Meow,apple
   // console.log('c1.color(): ', c1.color())
+  // console.log(c1.__proto__, c1.constructor) // Cat {} [Function: Cat]
 }
 
 if (0) {
-  class Rectangle {
+  class Animal {
     constructor () {
     }
     static logNbSides () {
@@ -46,11 +47,26 @@ if (0) {
     }
   }
 
-  class Square extends Rectangle {
+  class Cat extends Animal {
     constructor () {}
     static logDescription () {
       return super.logNbSides() + ' which are all equal'
     }
   }
-  console.log('Square.logDescription(): ', Square.logDescription())
+  console.log('Cat.logDescription(): ', Cat.logDescription())
+}
+
+if (1) {
+  class Animal {
+    constructor () {
+    }
+    say () {}
+  }
+
+  class Cat extends Animal {
+    go () {}
+  }
+
+  const obj1 = new Cat()
+  console.log('obj1', obj1)
 }
