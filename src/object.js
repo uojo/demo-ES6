@@ -14,3 +14,11 @@ for (let i in {a: 1, b: 2}) {
 }
 // a
 // b
+
+if (0) {
+  var obj1 = {a: 1}
+  var obj2 = Object.create(obj1)
+// console.log(obj1 === Object(obj1)) // true
+// console.log(obj1 !== obj2) // true
+// console.log(obj2.__proto__ === obj1) // true
+}

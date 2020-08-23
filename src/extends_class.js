@@ -56,7 +56,7 @@ if (0) {
   console.log('Cat.logDescription(): ', Cat.logDescription())
 }
 
-if (1) {
+if (0) {
   class Animal {
     constructor () {
     }
