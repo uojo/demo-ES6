@@ -27,6 +27,12 @@ module.exports = {
     'camelcase':0,
     'no-unused-vars':0,
     'import/no-duplicates':0,
-    'no-empty-pattern':0
+    'no-empty-pattern':0，
+    'new-cap':0,
+    'no-new':0,
+    'no-redeclare':0,
+    'no-undef':0,
+    'standard/no-callback-literal':0,
+    'one-var':0
   }
 }
