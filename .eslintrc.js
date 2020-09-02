@@ -25,6 +25,8 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     'no-constant-condition':0,
     'camelcase':0,
+    'no-lone-blocks':0,
+    'no-proto':0,
     'no-unused-vars':0,
     'import/no-duplicates':0,
     'no-empty-pattern':0，
