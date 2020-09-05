@@ -1,7 +1,8 @@
 /**
  * 创建型模式-单例模式
  * 示例：全局弹出框
- * 特点：创建对象时，返回已经创建的实例
+ * description: 闭包内部缓存变量用于存储实例，返回的函数中返回该变量。
+ * feature: 
  */
 
 const getSingle = function (fn) {
@@ -10,6 +11,7 @@ const getSingle = function (fn) {
   // console.log(1);
   return function () {
     if (!result) {
+      // 也可以直接在内部 new 实例化
       result = fn.apply(this, arguments)
     }
     // console.log(2, result);
@@ -17,6 +19,7 @@ const getSingle = function (fn) {
   }
 }
 
+// 特别：以外部参数传入的方式来实现穿件实例
 const createModal = function () {
   const main = {
     createTime: Date.now(),
