@@ -8,7 +8,7 @@
 }
 
 {
-// 原型链上创建方法
+  // 原型链上创建方法
   let b = 2
   // console.log(b.__proto__)
   b.__proto__.fn = () => 3
@@ -35,16 +35,20 @@
   console.log(foo.search(/\s+/)); // => 0
 }
 
-if(0){
-  let i =0
-  while(i<3){
-    console.log('i',i);
+if (0) {
+  let i = 0
+  while (i < 3) {
+    console.log('i', i);
     i++
   }
 
-  let j=0
-  do{
-    console.log('j',j);
+  let j = 0
+  do {
+    console.log('j', j);
     j++
-  }while(j<3)
+  } while (j < 3)
 }
+
+
+// 原因在于 + 运算符的期望操作数为数字，所以调用了，toNumber('')
+console.log(+('')) // 0

@@ -6,7 +6,7 @@
  * 缺点：
  */
 
-const fetchApi = (function() {
+const fetchOldApi = (function () {
   return [
     {
       name: 'apple',
@@ -20,7 +20,7 @@ const fetchApi = (function() {
 }())
 
 // 适配器
-const adaptor = function(oldInfo) {
+const adaptor = function (oldInfo) {
   const obj = {}
   for (let item of oldInfo) {
     obj[item.name] = item.id
@@ -28,7 +28,7 @@ const adaptor = function(oldInfo) {
   return obj
 }
 
-const oldApi = fetchApi()
+const oldApi = fetchOldApi()
 const newApi = adaptor(oldApi)
 console.log(oldApi, newApi);
 

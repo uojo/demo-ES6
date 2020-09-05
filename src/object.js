@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 const log = console.log
 
-0 && log(Object.assign({a: 1, b: {c: 1, d: 2}}, {b: {e: 3}}))
+0 && log(Object.assign({ a: 1, b: { c: 1, d: 2 } }, { b: { e: 3 } }))
 // {a:1, b:{e:3}}
 
 // 普通的对象，没有提供遍历器接口，所以无法使用 for...of
@@ -10,18 +10,18 @@ const log = console.log
 } */
 
 // for in 可用于数组
-for (let i in {a: 1, b: 2}) {
+for (let i in { a: 1, b: 2 }) {
   // log(i)
 }
 // a
 // b
 
 if (0) {
-  var obj1 = {a: 1}
+  var obj1 = { a: 1 }
   var obj2 = Object.create(obj1)
-// console.log(obj1 === Object(obj1)) // true
-// console.log(obj1 !== obj2) // true
-// console.log(obj2.__proto__ === obj1) // true
+  // console.log(obj1 === Object(obj1)) // true
+  // console.log(obj1 !== obj2) // true
+  // console.log(obj2.__proto__ === obj1) // true
 }
 
 if (0) {
@@ -50,26 +50,25 @@ if (0) {
   } catch (e) {
     console.log('e', e)
   }
-  console.log(Reflect.defineProperty({}, Symbol.a, {value: 1}))
+  console.log(Reflect.defineProperty({}, Symbol.a, { value: 1 }))
 }
 
-{
+if (1) {
   // Proxy 与 Reflect 结合使用
-  let target = {b: 2}
-  let handler = {
-    set (target, key, value, context) {
+  let obj = { b: 2 }
+  let proxy = new Proxy(obj, {
+    set(target, prop, value, context) {
       // 确认对象的属性赋值成功，除非 target 不是对象
-      return Reflect.set(target, key, value, context)
+      return Reflect.set(target, prop, value, context)
     },
-    get (target, key) {
-      console.log(target, key)
-      // console.log('get -> target, key, context', target, key, context)
-      return Reflect.get(target, key) + [1]
+    get(target, prop) {
+      // console.log('get => ', target, prop)
+      // console.log('get -> target, prop, context', target, prop, context)
+      return Reflect.get(target, prop)
     }
-  }
-  let proxy = new Proxy(target, handler)
-  // proxy.a = 1
-  console.log(proxy.b)
-  // 原因在于 + 运算符的期望操作数为数字，所以调用了，toNumber('')
-  console.log(+('')) // 0
+  })
+  // console.log("proxy.b", proxy.b)
+
+  proxy.a = 1
+  console.log("proxy.a", proxy.a)
 }
