@@ -1,5 +1,5 @@
 
-if (false) {
+if (0) {
   const timeout = (ms) => {
     return new Promise(resolve => {
       console.log(1)
@@ -26,7 +26,7 @@ if (false) {
 }
 
 // 定义 new Promise 时，内部代码除 resolve 、 reject 外都会立即执行。
-if (false) {
+if (0) {
   const f = (e) => {
     console.log(e)
   }
@@ -38,7 +38,7 @@ if (false) {
 }
 
 // 同步方法同步执行
-if (false) {
+if (0) {
   const f = (e) => {
     // setTimeout(() => {
     console.log(e)
@@ -50,7 +50,7 @@ if (false) {
 }
 
 // async 方法执行时，会等体内所有 await 或 return 后结束。
-if (false) {
+if (0) {
   const f = (e) => {
     console.log(e)
   }
@@ -61,7 +61,7 @@ if (false) {
 }
 
 // 同步方法异步执行，then
-if (false) {
+if (0) {
   const f = (e) => {
     console.log(e)
   }
@@ -71,7 +71,7 @@ if (false) {
 }
 
 // 执行顺序
-if (false) {
+if (0) {
   const timeout = function (ms) {
     return new Promise((resolve, reject) => {
       setTimeout(resolve, ms, 3)
@@ -88,7 +88,7 @@ if (false) {
 /**
  * 声明 Promise 后，除 resolve 和 reject 内部逻辑立即执行
  */
-if (false) {
+if (0) {
   const p1 = new Promise((resolve, reject) => {
     console.log('1', 1)
     resolve()
@@ -103,7 +103,7 @@ if (false) {
 /**
  * 当 resolve 的参数为另一个 promise，那么该 promise 的状态由那个传入的 promise 决定
  */
-if (false) {
+if (0) {
   const p1 = new Promise((resolve, reject) => {
     reject(new Error('error message!'))
   })
@@ -120,12 +120,12 @@ if (false) {
   })
 }
 
-if (false) {
+if (0) {
   const p1 = Promise.resolve(1)
     .then(e1 => {
       // console.log('TCL: e1', e1)
       // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({notRealError: true})
+      return Promise.reject({ notRealError: true })
     })
     .then(e2 => {
       // console.log('TCL: e2', e2)
@@ -138,7 +138,7 @@ if (false) {
   // console.log('TCL: p1', p1.PromiseValue)
 }
 
-if (true) {
+if (1) {
   const p1 = new Promise((resolve, reject) => {
     setTimeout(resolve, 500, 'hello')
   })
