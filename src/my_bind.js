@@ -54,7 +54,7 @@ Function.prototype.myApply = function (context) {
   return result
 }
 
-// bind 函数实现
+// 使用 apply 实现 bind 
 Function.prototype.myBind = function (context) {
   // 判断调用对象是否为函数
   if (typeof this !== 'function') {
@@ -65,7 +65,7 @@ Function.prototype.myBind = function (context) {
   var args = [...arguments].slice(1),
     fn = this
 
-  return function Fn () {
+  return function Fn() {
     // 根据调用方式，传入不同绑定值
     return fn.apply(
       this instanceof Fn ? this : context,
@@ -75,7 +75,7 @@ Function.prototype.myBind = function (context) {
 }
 
 const obj1 = {}
-function fn1 (params) {
+function fn1(params) {
   console.log('fn1.this === global', this === global)
   console.log('fn1.this === obj1', this === obj1, arguments)
   console.log('fn1.arguments', arguments)
@@ -84,15 +84,20 @@ function fn1 (params) {
 // bind
 // fn1.bind(obj1)()
 
-// mybind
-Function.prototype.mybind = function (context) {
-  // context.
-  console.log(this)
-  context._fn = this
-  return function (...params) {
-    context._fn(...params)
-    delete context._fn
+// 实现 bind 方法
+Function.prototype.mybind = function () {
+  const fn = this
+  const args = Array.prototype.slice.call(arguments, 1)
+  let context = arguments[0]
+  function rltFn() {
+    const key = Symbol()
+    context = this instanceof rltFn ? this : context // 应用于构造函数时，this 指向函数本身
+    context[key] = fn
+    context[key](...args.concat(arguments)) // 可以替换为 fn.apply(context,args.concat(arguments))
+    delete context[key]
   }
+  rltFn.prototype = this.prototype // 返回的函数支持 new 
+  return rltFn
 }
 
 // fn1.mybind(obj1)()

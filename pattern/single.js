@@ -1,20 +1,17 @@
 /**
  * 创建型模式-单例模式
  * 示例：全局弹出框
- * description: 闭包内部缓存变量用于存储实例，返回的函数中返回该变量。
- * feature: 
+ * 描述: 利用闭包缓存变量用于存储实例，返回的函数中返回该变量。
+ * 优点: 
+ * 缺点: 
  */
 
 const getSingle = function (fn) {
-  // console.log(this);
   let result = null
-  // console.log(1);
   return function () {
     if (!result) {
-      // 也可以直接在内部 new 实例化
       result = fn.apply(this, arguments)
     }
-    // console.log(2, result);
     return result
   }
 }
@@ -28,6 +25,6 @@ const createModal = function () {
   return main
 }
 
-const createSingleModel = getSingle(createModal)
+const createSingleModel = getSingle(createModal) // 这里是传入的，也可以直接在单例类内部获取。
 console.log("createSingleModel", createSingleModel())
 // setInterval(createSingleModel, 2000);

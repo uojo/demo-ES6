@@ -1,4 +1,6 @@
 // 对象的隐式类型转化，在 toString 与 valueOf 之前会执行 Symbol.toPrimitive 属性
+const path = require('path')
+
 {
   let a = [1, 2]
   a[Symbol.toPrimitive] = function () {
@@ -51,4 +53,12 @@ if (0) {
 
 
 // 原因在于 + 运算符的期望操作数为数字，所以调用了，toNumber('')
-console.log(+('')) // 0
+// console.log(+('')) // 0
+// console.log(__dirname, __filename);
+
+const fn1 = () => {
+  console.log('hello');
+  return 100
+}
+console.log(fn1(), void (fn1));
+console.log(path.resolve(__dirname, '../src'));

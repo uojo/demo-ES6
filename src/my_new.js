@@ -5,7 +5,7 @@
 
 // 实现:
 
-function objectFactory () {
+function objectFactory() {
   let newObject = null
   let constructor = Array.prototype.shift.call(arguments)
   let result = null
@@ -34,8 +34,8 @@ function objectFactory () {
 // objectFactory(构造函数, 初始化参数);
 
 // 简单版本
-function easyFactory (func, args) {
-  const self = Object.create(func.prototype)
+function easyFactory(func, args) {
+  const self = Object.create(func.prototype) // 实现 self.__proto__ === func.prototype
   const flt = func.apply(self, args)
   const flag = flt && (/object|function/.test(typeof flt))
   return flag ? flt : self
