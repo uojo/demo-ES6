@@ -1,0 +1,20 @@
+<button onclick="javascript:history.back()">back</button>
+<input onkeyup="handleChangeFn1(this)" />
+<button onclick="javascript:history.forward()">forward</button>
+
+<script>
+  function handleChangeFn1(el) {
+    if (/^[1-3]{1}$/.test(el.value)) {
+      history.pushState({ page: el.value }, `title ${el.value}`, `?page=${el.value}`)
+      // history.go(el.value)
+    }
+  }
+
+  window.onpopstate = function (event) {
+    console.log(`${history.length}, location: ${document.location}, state: ${JSON.stringify(event.state)}`)
+  }
+
+  // history.pushState({ page: 10 }, "title 1", "?page=1")
+  // history.pushState({ page: 20 }, "title 2", "?page=2")
+  // history.replaceState({ page: 30 }, "title 3", "?page=3")
+</script>
