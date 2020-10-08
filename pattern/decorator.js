@@ -1,7 +1,7 @@
 /**
  * 结构型模式-装饰器模式
  * 示例：
- * 特点：类似于使用子类继承父类（实现子类继承的又一种方式），传入增强的对象。
+ * 特点：类似于使用子类继承父类（实现子类继承的另一种方式），传入增强的对象。
  * 目的：增强对象，但不改变原对象。
  */
 
@@ -11,9 +11,9 @@ class Shape {
   }
 }
 // new Shape().draw()
-class Cricle extends Shape {
+class Circle extends Shape {
   draw() {
-    console.log('Shape.Cricle.draw');
+    console.log('Shape.Circle.draw');
   }
 }
 
@@ -47,8 +47,8 @@ class RedShapeDecorator extends ShapeDecorator {
   }
 }
 
-new ShapeDecorator(new Cricle()).draw()
-new RedShapeDecorator(new Cricle()).draw()
+new ShapeDecorator(new Circle()).draw()
+new RedShapeDecorator(new Circle()).draw()
 
 /**
  * 经典套路，但无法诠释装饰器模式
