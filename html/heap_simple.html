@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  hello
+  <script>
+    function main() {
+      const temp1 = {
+        long1: new Array(9000000).join('+'),
+      }
+      function fn1() {
+        const temp2 = {
+          long1: new Array(9000000).join('-'),
+        }
+        return function fn11() {
+          if (temp2) return
+        }
+      }
+      const fn10 = fn1()
+      setInterval(fn10, 2000, temp1)
+      temp1 = null
+    }
+    main()
+  </script>
+
+</html>

@@ -1,0 +1,19 @@
+<div id="wrap1"></div>
+<script>
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.baidu.com';
+  const wrap1El = document.getElementById("wrap1")
+  wrap1El.appendChild(iframe);
+  iframe.addEventListener('load', function () {
+    // const local_variable = iframe.contentWindow;
+    function leakingListener() {
+      // Do something with `local_variable`.
+      // if (local_variable) { }
+    }
+    wrap1El.addEventListener('my-debug-event', leakingListener);
+    wrap1El.removeChild(iframe);
+    // iframe = null
+    // wrap1El = null
+    // BUG: forgot to unregister `leakingListener`.
+  });
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    div {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // 10
+    (function fn1() {
+      console.log('foo');
+    }())
+  </script>
+  <div>
+    <span>hello</span>
+  </div>
+
+  <style>
+    /* 10.1 Schedule Style Recalculation */
+    /* 21 Recalculate Style - invalidate Layout 无效布局 - Element has pending invalidation list for #document */
+    /* 22 Onload Event after - Layout*/
+    span {
+      color: red;
+    }
+  </style>
+
+  <script>
+      // 11
+      (function fn2() {
+        console.log('bar');
+      }())
+  </script>
+
+</html>

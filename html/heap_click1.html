@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <button id="foo">click me</button>
+  <script>
+    function fooEventFn() {
+      let foo_el = document.getElementById("foo")
+      const rlt = foo_el.innerHTML
+      foo_el.addEventListener('click', function handleClick1() {
+        // setInterval(function fn2() {
+        console.log(rlt);
+        // console.log(foo_el.innerHTML);
+        // }, 1000);
+      })
+      // foo_el = null
+    }
+    // fooEventFn()
+  </script>
+
+  <div id="j_nodes">nodes DOM</div>
+  <script>
+    var myNodes = '';
+    function myNodes_fn() {
+      var item = {
+        name: new Array(1000000).join('x')
+      }
+      // console.log("item", item) // 由于这行引用 item，导致 window.myNodes 无法回收
+      myNodes = document.getElementById("j_nodes")
+      myNodes.item = item
+      myNodes.parentElement.removeChild(myNodes)
+    }
+    // myNodesFn()
+  </script>
+
+  <script>
+    // 循环闭包引用
+    function fn3() {
+      var temp1 = null
+      var fn31 = function () {
+        temp1 = {
+          long1: new Array(1000000).join('*'),
+          fn311() {
+            console.log('someMessage')
+          }
+        };
+        var temp2 = temp1
+        var fn312 = function () {
+          if (temp2) {
+            console.log("hi")
+          }
+        }
+      };
+      fn31()
+      // setInterval(fn31, 2000)
+    }
+    // fn3()
+
+    // 尝试使用参数传入到函数内执行，而非引用对象
+    function fn4() {
+      var temp1 = {
+        long1: new Array(9000000).join('*'),
+      }
+      function fn41() {
+        // console.log(a);
+        // if (temp1) return
+        // if (a) { }
+      }
+      temp1 = null
+      setInterval(fn41, 3000, temp1)
+    }
+    fn4()
+  </script>
+
+  <button id="j_createBtn">增加节点</button>
+  <script>
+    // 创建DOM对象，未挂载
+    function fn5() {
+      function create() {
+        var ul = document.createElement('ul');
+        for (var i = 0; i < 10; i++) {
+          var li = document.createElement('li');
+          ul.appendChild(li);
+        }
+        detachedNodes = ul; // 没有使用 var 声明，导致内存泄漏
+      }
+      document.getElementById('j_createBtn').addEventListener('click', create);
+    }
+    // fn5()
+  </script>
+</body>
+
+</html>

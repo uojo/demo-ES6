@@ -54,21 +54,25 @@ if (0) {
 }
 
 if (1) {
-  // Proxy 与 Reflect 结合使用
+  // Proxy 结合 Reflect 实现观察者模式，Proxy 实现数据观察，Reflect 实现数据修改。
+  // target === obj
+  // 只有操作 Proxy 返回的实例，才会触发 Proxy 内的回调
   let obj = { b: 2 }
   let proxy = new Proxy(obj, {
     set(target, prop, value, context) {
-      // 确认对象的属性赋值成功，除非 target 不是对象
+      // 使用 Reflect 的目的：确保对象的属性赋值成功，除非 target 不是对象
       return Reflect.set(target, prop, value, context)
     },
     get(target, prop) {
-      // console.log('get => ', target, prop)
+      // console.log(target === obj); // true
+      console.log('get => ', prop) // a
       // console.log('get -> target, prop, context', target, prop, context)
       return Reflect.get(target, prop)
     }
   })
   // console.log("proxy.b", proxy.b)
 
-  proxy.a = 1
-  console.log("proxy.a", proxy.a)
+  proxy.a = 1 // 触发 set 回调
+  console.log("proxy.a", proxy.a) // 1，触发 get 回调
+  console.log("obj.a", obj.a) // 1，获取到最新数据
 }

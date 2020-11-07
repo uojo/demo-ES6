@@ -35,6 +35,7 @@ if (0) {
  * 方案2 proxy + Reflect
  * 特点：proxy 负责观察数据设置与获取。
  * 优点：proxy 可以弥补 defineProperty 在劫持数组上的缺失
+ * 注意：proxy get 内的 this 指向到 proxy 返回的实例上，可以使用 bind 来解决。
  */
 if (1) {
   const obj = { a: { b: 2 } }
