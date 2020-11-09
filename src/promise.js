@@ -149,6 +149,7 @@ if (1) {
       resolve(err)
     })
   })
+  // 当所有 promise 实例完成后执行 then
   Promise.all([p1, p2]).then(values => {
     for (let val of values) {
       console.log('TCL: val', typeof val)
