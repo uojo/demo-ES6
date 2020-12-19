@@ -1,0 +1,14 @@
+<button id="j_grow_btn">动态增加页面 DOM 节点</button>
+<div id="j_body"></div>
+<script>
+  function main() {
+    function grow() {
+      for (var i = 0; i < 10000; i++) {
+        document.getElementById('j_body').appendChild(document.createElement('div'));
+      }
+    }
+
+    document.getElementById('j_grow_btn').addEventListener('click', grow);
+  }
+  main()
+</script>

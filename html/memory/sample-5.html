@@ -1,0 +1,11 @@
+<button id="j_grow_btn">动态增加数组长度</button>
+<script>
+  function main() {
+    var fooArr = [];
+    function grow() {
+      fooArr.push(new Array(9000000).join('xxx'));
+    }
+    document.getElementById('j_grow_btn').addEventListener('click', grow);
+  }
+  main()
+</script>

@@ -1,0 +1,11 @@
+<button id="j_dom1">闭包内引用外部字符串</button>
+<script>
+  function main() {
+    let el = document.getElementById("j_dom1")
+    const rlt = el.innerHTML
+    el.addEventListener('click', function handleClick1() {
+      console.log(rlt);
+    })
+  }
+  main()
+</script>

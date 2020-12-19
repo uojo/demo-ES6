@@ -1,0 +1,20 @@
+<h1>发现 DOM 泄漏</h1>
+<p>堆分析器可以反映浏览器原生对象（DOM 节点、CSS 规则）与 JavaScript 对象之间的双向依赖关系。这样有助于发现由被遗忘的已分离 DOM 子树引起的不可见泄漏。</p>
+<button id="j_btn">点击删除DOM</button>
+<span id="j_detached">将被移除的DOM</span>
+<script>
+  function main() {
+    let btnEl = document.getElementById("j_btn")
+    btnEl.addEventListener('click', function handleClickBtn() {
+      let item = {
+        name: new Array(1000000).join('aaa')
+      }
+      const detached_el = document.getElementById("j_detached")
+      if (detached_el) {
+        detached_el.item = item
+        detached_el.parentElement.removeChild(detached_el)
+      }
+    })
+  }
+  main()
+</script>

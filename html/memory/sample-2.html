@@ -1,0 +1,10 @@
+<button id="j_dom1">闭包内引用外部对象的属性</button>
+<script>
+  function main() {
+    let el = document.getElementById("j_dom1")
+    el.addEventListener('click', function handleClick1() {
+      console.log(el.innerHTML); // DOM.innerHTML 的值是 外部字符串（external string）
+    })
+  }
+  main()
+</script>
