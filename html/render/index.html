@@ -46,9 +46,14 @@
       // 所有资源下载完毕，触发 load 事件。
       da('load')
     })
+
     window.onbeforeunload = function handleBeforeunload() {
       da('beforeunload')
     }
+
+    document.addEventListener("readystatechange", (event) => {
+      da(`readystatechange:${document.readyState}`)
+    });
   </script>
 
   <!-- CSS 是并行下载的 -->
