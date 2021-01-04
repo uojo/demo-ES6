@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+  <title>页面渲染与资源阻塞</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 
+    script 代码块，当 DOM 解析时，立即执行。
+  -->
+  <script>
+    var myEvents = []
+    console.log('myEvents: ', myEvents);
+    var preTime = Date.now()
+    function offsetTime() {
+      rlt = Date.now() - preTime
+      preTime = Date.now()
+      return rlt
+    }
+    function da(label) {
+      console.log(label);
+      myEvents.push({ time: offsetTime(), label })
+    }
+    da('start');
+  </script>
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.js?97.1k"></script> -->
+  <!-- 属性 async 表示延迟下载，并且加载脚本时，不阻塞 DOM 解析。 多个 async 资源，执行顺序不确定。 -->
+  <script async src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js?25.9k"></script>
+  <!-- 属性 defer 表示正常下载，但延迟执行（等到文档解析完成后）。多个 defer 资源，按照书写顺序执行。 -->
+  <script defer src="https://cdn.bootcdn.net/ajax/libs/zepto/1.2.0/zepto.min.js?10k"></script>
+  <!-- 
+    等待 script 标签下载 JS 文件完成后，在解析下一个 script 标签
+  -->
+  <script>
+    da('before css')
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // DOM 解析完成，会触发 DOMContentLoaded 事件。解析完成指的是解析到 </html> 为止。
+      da('DOMContentLoaded')
+      handleDomLoaded();
+    })
+    function handleDomLoaded() {
+      console.log(document.querySelectorAll("p"));
+    }
+
+    window.addEventListener("load", function handleLoad() {
+      // 所有资源下载完毕，触发 load 事件。
+      da('load')
+    })
+    window.onbeforeunload = function handleBeforeunload() {
+      da('beforeunload')
+    }
+  </script>
+
+  <!-- CSS 是并行下载的 -->
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css?23.1k" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css?6.9k" rel="stylesheet">
+  <link href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap-responsive.css?4.8k" rel="stylesheet">
+
+  <!-- 
+    CSS 下载，不会阻塞 JS 下载，但会阻塞 JS 的执行。
+    script 标签，会阻塞 DOM 解析
+  -->
+  <!-- <script id="j_after">
+    console.log("after css");
+  </script> -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js?31.9k"></script>
+</head>
+
+<body onpageshow="return da('pageshow');" onpagehide="return da('pagehide');" onunload="return da('unload');">
+  <img src="./37k.jpg" onload="da('image load')" style="height:120px;">
+  <p>请设置 Network 下行速率为 10k/s 后，再在地址栏中输入地址回车，观察控制台 Log 与页面渲染</p>
+  <p>1、当 script#j_after 存在时，页面内显示内容与控制台输出 Event:DOMContentLoaded 几乎同时。</p>
+  <p>2、当 script#j_after 不存在时，控制台先输出 Event:DOMContentLoaded，再显示页面内容。</p>
+  <a href="https://www.cnblogs.com/bibiafa/p/9364986.html" target="blank">参考</a>
+
+</body>
+
+</html>

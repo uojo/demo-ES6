@@ -1,0 +1,25 @@
+<button onclick="updateNodes()">刷新节点</button>
+<div id="wrapper"></div>
+<script>
+  var elements = [];
+  function updateNodes() {
+    var wrapper = document.getElementById("wrapper"),
+      len = wrapper.childNodes.length;
+    if (len) {
+      for (var j = len - 1; j >= 0; j--) {
+        wrapper.removeChild(wrapper.childNodes[j]);
+      }
+    }
+
+    var div,
+      i = 100,
+      frag = document.createElement("div");
+    for (; i > 0; i--) {
+      div = document.createElement("div");
+      div.appendChild(document.createTextNode(i + " - " + new Date().toTimeString()));
+      frag.appendChild(div);
+    }
+    wrapper.appendChild(frag);
+    elements.push(div);
+  }
+</script>

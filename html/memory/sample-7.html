@@ -1,0 +1,19 @@
+<h1>在虚拟 UL 元素内新增 LI 元素</h1>
+<button id="j_btn">点击执行</button>
+
+<script>
+  // 创建DOM对象，未挂载
+  function main() {
+    function create() {
+      var ul = document.createElement('ul');
+      for (var i = 0; i < 10; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = `li-${i + 1}`
+        ul.appendChild(li);
+      }
+      // detachedNodes = ul; // 没有使用 var 声明，导致内存泄漏
+    }
+    document.getElementById('j_btn').addEventListener('click', create);
+  }
+  main()
+</script>

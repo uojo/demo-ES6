@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    function main() {
+      function circle(n) {
+        // 遍历随机数
+        for (var i = 0; i < n; i++) {
+          // do nothing
+        }
+      }
+      const circle9 = () => circle(999999999)
+
+      // 计算程序执行的精确时间
+      function getFunctionTimeWithDate(func) {
+        var timeStart = Date.now();
+        console.log('timeStart: Date.now()', timeStart); // 1606568753503
+
+        // 执行开始
+        func();
+        // 执行结束
+        var timeEnd = Date.now();
+        console.log('timeEnd: Date.now()', timeEnd); // 1606568753929
+
+        // 返回执行时间
+        return (timeEnd - timeStart);
+      }
+
+      // 毫秒
+      console.log('Date.now', getFunctionTimeWithDate(circle9));
+      // 426 毫秒
+
+      function getFunctionTimeWithPerformance(func) {
+        var timeStart = window.performance.now(); // 精确到微秒的毫秒数
+        console.log('timeStart: performance.now()', timeStart); // 428.4149999730289
+
+        // 执行开始
+        func();
+        // 执行结束
+        var timeEnd = window.performance.now();
+        console.log('timeEnd: performance.now()', timeEnd); // 833.8199999416247
+
+        // 返回执行时间
+        return (timeEnd - timeStart);
+      }
+      // 精确到微秒（1秒=1000000微妙），且不受线程阻塞影响
+      console.log('performance.now', getFunctionTimeWithPerformance(circle9));
+      // 405.4049999685958 毫秒
+
+      circle9()
+    }
+    main()
+  </script>
+</head>
+
+<body>
+  <div>
+    请打开控制台查看
+  </div>
+</body>
+
+</html>

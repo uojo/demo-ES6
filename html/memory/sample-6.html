@@ -1,0 +1,21 @@
+<h1>定时器，执行函数时传入大对象</h1>
+<button id="j_btn">点击执行</button>
+<script>
+  function main() {
+    var temp1 = {
+      longStr: new Array(9000000).join('*'),
+    }
+
+    function func1(obj) {
+      // obj.a = Date.now()  // 如果改行执行，那么 temp1 将不被释放
+    }
+
+    function handleClick() {
+      // 尝试使用参数传入到函数内执行，而非引用对象
+      setInterval(func1, 1000, temp1)
+    }
+
+    document.getElementById('j_btn').addEventListener('click', handleClick);
+  }
+  main()
+</script>

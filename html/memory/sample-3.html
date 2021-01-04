@@ -1,10 +1,25 @@
-<button id="j_dom1">闭包内引用外部字符串</button>
+<h1>闭包内引用内外部函数</h1>
+<button id="j_dom1">点击执行1</button>
+<button id="j_dom2">点击执行2</button>
 <script>
   function main() {
-    let el = document.getElementById("j_dom1")
-    const rlt = el.innerHTML
-    el.addEventListener('click', function handleClick1() {
-      console.log(rlt);
+    let el1 = document.getElementById("j_dom1")
+    let el2 = document.getElementById("j_dom2")
+    const el1Text = el1.innerHTML
+
+    function func1(data) {
+      return 'prefix1_' + data.name
+    }
+
+    el1.addEventListener('click', function handleClick1() {
+      let val1 = func1({ name: el1Text })
+    })
+
+    el2.addEventListener('click', function handleClick2() {
+      function func2(data) {
+        return 'prefix2_' + data.name
+      }
+      let val2 = func2({ name: el1Text })
     })
   }
   main()
