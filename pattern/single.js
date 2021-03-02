@@ -16,8 +16,8 @@ const getSingle = function (fn) {
   }
 }
 
-// 特别：以外部参数传入的方式来实现穿件实例
-const createModal = function () {
+// 特别：以外部参数传入的方式来实现创建实例
+const createModel = function () {
   const main = {
     createTime: Date.now(),
   }
@@ -25,6 +25,6 @@ const createModal = function () {
   return main
 }
 
-const createSingleModel = getSingle(createModal) // 这里是传入的，也可以直接在单例类内部获取。
+const createSingleModel = getSingle(createModel) // 这里是传入的，也可以直接在单例类内部获取。
 console.log("createSingleModel", createSingleModel())
 // setInterval(createSingleModel, 2000);
