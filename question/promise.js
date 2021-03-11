@@ -7,9 +7,10 @@
 function PromiseA(cb) {
   const self = this
   let state = 'pending'
-  let resCache = null
   let cbs = []
+  let resCache = undefined
 
+  // 实现：将回调入栈；判断是否执行 resolve
   self.then = function (cb) {
     console.log('then');
     cbs.push(cb)
@@ -19,6 +20,7 @@ function PromiseA(cb) {
     return self
   }
 
+  // 实现：变更状态；出栈执行回调函数；判断是否继续递归执行自己
   function resolve(res) {
     console.log('resolve', res);
     state = 'fulfilled'
@@ -26,12 +28,7 @@ function PromiseA(cb) {
     // console.log('resolve', cbs.length);
     if (cbs.length > 0) {
       let r = cbs.shift()(res)
-      if (r !== undefined) {
-        resCache = r
-      }
-      if (cbs.length > 0) {
-        resolve(r)
-      }
+      resolve(r)
     }
   }
 
@@ -40,7 +37,7 @@ function PromiseA(cb) {
 }
 
 
-const PromiseClass = Promise && PromiseA
+const PromiseClass = Promise || PromiseA
 
 new PromiseClass((resolve, reject) => {
   // setTimeout(() => {
@@ -48,7 +45,7 @@ new PromiseClass((resolve, reject) => {
   // }, 1);
 }).then(res => {
   console.log('P.then.1', res);
-  return 1
+  // return 1
 }).then(res => {
   console.log('P.then.2', res);
 })

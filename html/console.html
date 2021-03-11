@@ -1,0 +1,12 @@
+<script>
+  function loop() {
+    new Array(1000).fill('{"a":1}').forEach(function parseFn(e) {
+      console.log(JSON.parse(e).a);
+    })
+  }
+  console.profile('bar')
+  // console.time('foo')
+  loop()
+  // console.timeEnd('foo')
+  console.profileEnd('bar')
+</script>
