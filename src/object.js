@@ -1,20 +1,58 @@
 /* eslint-disable no-lone-blocks */
 const log = console.log
 
-0 && log(Object.assign({ a: 1, b: { c: 1, d: 2 } }, { b: { e: 3 } }))
-// {a:1, b:{e:3}}
+if (0) {
+  0 && log(Object.assign({ a: 1, b: { c: 1, d: 2 } }, { b: { e: 3 } }))
+  // {a:1, b:{e:3}}
+}
+
 
 // 普通的对象，没有提供遍历器接口，所以无法使用 for...of
 /* for(let v of {a:1,b:2}){
   log(v);
 } */
 
-// for in 可用于数组
-for (let i in { a: 1, b: 2 }) {
-  // log(i)
+
+if (0) {
+  // for in 也可用于数组
+  for (let i in { a: 1, b: 2 }) {
+    // log(i)
+  }
+  // a
+  // b
 }
-// a
-// b
+
+
+if (1) {
+  var obj = { "name": "Poly", "size": 10 }
+  Object.defineProperty(obj, "age", { value: "forever 18", enumerable: false });
+  Object.prototype.prop1 = function () { console.log("proto"); };
+  Object.prototype.prop2 = 2;
+
+  /**
+   * for...in 返回可枚举属性，包括原型对象。
+   */
+  for (var a in obj) console.log(a); // name, size, prop1, prop2
+
+  /**
+   * Object.keys 返回可枚举属性，不包括原型对象
+   */
+  console.log(Object.keys(obj)); // [ 'name', 'size' ]
+
+  /**
+   * getOwnPropertyNames 返回对象的自定义属性名称，不包括原型对象
+   */
+  console.log(Object.getOwnPropertyNames(obj)); // [ 'name', 'size', 'age' ]
+
+  /**
+   * hasOwnProperty 判断属性是否是对象的自身属性（定义后，再自定义的属性），不包括原型对象
+   */
+  console.log(obj.hasOwnProperty('name')); // true
+  console.log(obj.hasOwnProperty('age')); // true
+  console.log(obj.hasOwnProperty('prop1')); // false
+  console.log(obj.hasOwnProperty('prop2')); // false
+}
+
 
 if (0) {
   var obj1 = { a: 1 }
@@ -53,7 +91,7 @@ if (0) {
   console.log(Reflect.defineProperty({}, Symbol.a, { value: 1 }))
 }
 
-if (1) {
+if (0) {
   // Proxy 结合 Reflect 实现观察者模式，Proxy 实现数据观察，Reflect 实现数据修改。
   // target === obj
   // 只有操作 Proxy 返回的实例，才会触发 Proxy 内的回调
