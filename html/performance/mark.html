@@ -1,59 +1,41 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <script>
-
-    function circle(n) {
-      // 遍历随机数
-      for (var i = 0; i < n; i++) {
-        // do nothing
-      }
+<div>
+  打开 dev-tools 查看
+</div>
+<script src="./do.js"></script>
+<script>
+  function randomFunc(n) {
+    if (!n) {
+      // 生成一个随机数
+      n = ~~(Math.random() * 10000);
     }
+    var nameStart = 'markStart' + n;
+    var nameEnd = 'markEnd' + n;
+    // 函数执行前做个标记
+    performance.mark(nameStart);
 
-    function randomFunc(n) {
-      if (!n) {
-        // 生成一个随机数
-        n = ~~(Math.random() * 10000);
-      }
-      var nameStart = 'markStart' + n;
-      var nameEnd = 'markEnd' + n;
-      // 函数执行前做个标记
-      window.performance.mark(nameStart);
+    circle(n)
 
-      circle(n)
+    // 函数执行后再做个标记
+    performance.mark(nameEnd);
 
-      // 函数执行后再做个标记
-      window.performance.mark(nameEnd);
+    // 然后测量这个两个 mark 间的时间距离，并保存起来
+    var name = 'measureRandomFunc' + n;
+    performance.measure(name, nameStart, nameEnd);
+  }
 
-      // 然后测量这个两个标记间的时间距离，并保存起来
-      var name = 'measureRandomFunc' + n;
-      window.performance.measure(name, nameStart, nameEnd);
-    }
+  randomFunc();
+  randomFunc();
+  randomFunc(888); // 指定一个名字
 
-    // 执行三次看看
-    randomFunc();
-    randomFunc();
-    // 指定一个名字
-    randomFunc(888);
-    // 所有标记记录
-    var marks = window.performance.getEntriesByType('mark');
-    console.log('marks: ', marks);
+  // 所有标记记录
+  var marks = performance.getEntriesByType('mark');
+  console.log('marks: ', marks);
 
-    // 所有测量记录
-    var measure = window.performance.getEntriesByType('measure');
-    console.log('measure: ', measure);
+  // 所有测量记录
+  var measure = performance.getEntriesByType('measure');
+  console.log('measure: ', measure);
 
-    // 获取单个测量记录
-    var entries = window.performance.getEntriesByName('measureRandomFunc888');
-    console.log('entries: ', entries);
-  </script>
-</head>
-
-<body>
-  <div>
-    打开 dev-tools 查看
-  </div>
-</body>
-
-</html>
+  // 获取单个测量记录
+  var entries = performance.getEntriesByName('measureRandomFunc888');
+  console.log('entries: ', entries);
+</script>

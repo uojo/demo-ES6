@@ -1,0 +1,15 @@
+<div>
+  请打开控制台查看
+</div>
+<script src="./do.js"></script>
+<script>
+  function main() {
+    var t = performance.timing;
+    console.log('timing: ', t);
+    var pageLoadTime = t.loadEventStart - t.navigationStart;
+    var dns = t.domainLookupEnd - t.domainLookupStart;
+    var tcp = t.connectEnd - t.connectStart;
+    var ttfb = t.responseStart - t.navigationStart;
+  }
+  main()
+</script>

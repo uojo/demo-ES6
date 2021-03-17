@@ -1,0 +1,10 @@
+<div>
+  浏览器获取网页时，会对网页中每个对象（脚本文件、样式表、图片文件等）发出一个HTTP请求。performance.getEntries方法以数组形式，返回这些请求的时间统计信息，有多少个请求，返回数组就会有多少个成员。
+</div>
+<script src="./do.js"></script>
+<script>
+  function main() {
+    console.log('entries: ', performance.getEntries());
+  }
+  main()
+</script>
