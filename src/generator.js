@@ -1,6 +1,6 @@
 const log = console.log
 
-function asyncFn (val, time = 1) {
+function asyncFn(val, time = 1) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       resolve(++val)
@@ -12,7 +12,7 @@ function asyncFn (val, time = 1) {
 
 // ES6:function*/yield
 if (0) {
-  function * gen1 (val) {
+  function* gen1(val) {
     log(0, val)
     // => 0,10
     let v1 = yield asyncFn(val)
@@ -42,7 +42,7 @@ if (0) {
 
 // ES7:async/await
 if (0) {
-  async function gen2 (val) {
+  async function gen2(val) {
     let v1 = await asyncFn(val)
     let v2 = await asyncFn(v1)
     // log('gen2 >',v1,v2)
@@ -119,5 +119,5 @@ const fn2 = function (a) {
 
 for (let i = 0; i < 10; i++) {
   // fn2(i)
-  fn2({i: i})
+  fn2({ i: i })
 }
