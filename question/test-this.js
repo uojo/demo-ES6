@@ -1,15 +1,19 @@
 
-function f1 () {
+function f1() {
   return this
 }
 // console.log(f1() === global)
 
-function f2 () {
+function f2() {
   'use strict'
   return this
 }
 // console.log(f2() === undefined)
 
+
+/**
+ * 函数内的 this 指向 调用该函数的对象
+ */
 var o = {
   prop: 37,
   f: function () {

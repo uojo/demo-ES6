@@ -5,14 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "nodemon-file",
+      "name": "nodemon-curFile",
       "type":"node",
       "request": "launch",
       "runtimeExecutable": "nodemon",
       "program": "${file}",
     },
     {
-      "name": "node-file",
+      "name": "node-curFile",
       "type":"node",
       "request": "launch",
       "program": "${file}",

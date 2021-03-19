@@ -1,17 +1,28 @@
-/* eslint-disable no-useless-constructor */
-class Cuser {
-  constructor () {
-    this.a1 = 1
+class ClassA {
+  constructor() {
+    this.attrA = 1
   }
-  say0 () {
-
-  }
+  methodA() { }
 }
 
-function Fuser (name) {
-  this.name = name
+function MethodB(name) {
+  this.attrB = name
 }
-Fuser.prototype.say1 = () => {}
+MethodB.prototype.methodB = () => { }
 
-console.log('Object.getOwnPropertyNames(Cuser): ', Object.getOwnPropertyNames(Cuser))
-console.log('Object.getOwnPropertyNames(Fuser): ', Object.getOwnPropertyNames(Fuser))
+
+console.log('Object.getOwnPropertyNames(ClassA): ', Object.getOwnPropertyNames(ClassA))
+// [ 'length', 'prototype', 'name' ]
+
+console.log('Object.getOwnPropertyNames(objA): ', Object.getOwnPropertyNames(new ClassA()))
+// [ 'attrA' ]
+
+console.log('Object.getOwnPropertyNames(MethodB): ', Object.getOwnPropertyNames(MethodB))
+// [ 'length', 'prototype', 'name', 'arguments', 'caller' ]
+
+console.log('Object.getOwnPropertyNames(objB): ', Object.getOwnPropertyNames(new MethodB()))
+// [ 'attrB' ]
+
+/**
+ * 构造函数与class类存在区别
+ */
