@@ -6,7 +6,7 @@
  * 函数的原型链: Func.__proto__ => Function.prototype; Function.prototype.__proto__ => Object.prototype; Object.prototype.__proto__ => null;
  * 函数的: constructor => Function; Function.constructor => Function;
  * 重要结论：
- *  1、函数也是对象，所有对象均有属性 __proto__ 和 constructor，函数多一个 prototype
+ *  1、所有对象均有属性：__proto__ 和 constructor，函数对象多一个属性：prototype
  *  2、原型链的终点是 null
  *  3、所有函数的 __proto__ 属性均指向 Function.prototype，包括 Object、Function
  */
