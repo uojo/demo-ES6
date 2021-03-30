@@ -1,76 +1,88 @@
 /* eslint-disable no-lone-blocks */
 const log = console.log
 
+/**
+ * assign 合并对象的第一级属性，并且全覆盖
+ */
 if (0) {
   0 && log(Object.assign({ a: 1, b: { c: 1, d: 2 } }, { b: { e: 3 } }))
   // {a:1, b:{e:3}}
 }
 
 
-// 普通的对象，没有提供遍历器接口，所以无法使用 for...of
-/* for(let v of {a:1,b:2}){
-  log(v);
-} */
-
-
+/**
+ * 普通的对象 无法使用 for-of，因为没有提供遍历器接口
+ */
 if (0) {
-  // for in 也可用于数组
+  for (let v of { a: 1, b: 2 }) {
+    log(v);
+  }
+  // error!
+}
+
+
+/**
+ * for-in 用于对象（包括数组），遍历对象的可枚举属性
+ */
+if (0) {
   for (let i in { a: 1, b: 2 }) {
-    // log(i)
+    log(i)
   }
   // a
   // b
 }
 
 
-if (1) {
+/**
+ * for-in 遍历对象的可枚举属性，包括原型链
+ * Object.keys 返回对象的可枚举属性，不包括原型链上的属性
+ * getOwnPropertyNames 返回对象的自定义属性名称，不包括原型链上的属性
+ * hasOwnProperty 判断属性是否是对象的自身属性（申明后，再定义的属性），不包括原型链上的属性
+ */
+if (0) {
   var obj = { "name": "Poly", "size": 10 }
-  Object.defineProperty(obj, "age", { value: "forever 18", enumerable: false });
+  Object.defineProperty(obj, "enum0", { value: "forever 18", enumerable: false });
+  Object.defineProperty(obj, "enum1", { value: "forever 18", enumerable: true });
   Object.prototype.prop1 = function () { console.log("proto"); };
   Object.prototype.prop2 = 2;
 
-  /**
-   * for...in 返回可枚举属性，包括原型对象。
-   */
-  for (var a in obj) console.log(a); // name, size, prop1, prop2
+  // 包括原型对象
+  for (var a in obj) console.log(a); // name, size, enum1, prop1, prop2
 
-  /**
-   * Object.keys 返回可枚举属性，不包括原型对象
-   */
-  console.log(Object.keys(obj)); // [ 'name', 'size' ]
+  // 不包括原型对象
+  console.log('Object.keys', Object.keys(obj)); // [ 'name', 'size', 'enum1' ]
 
-  /**
-   * getOwnPropertyNames 返回对象的自定义属性名称，不包括原型对象
-   */
-  console.log(Object.getOwnPropertyNames(obj)); // [ 'name', 'size', 'age' ]
+  console.log('Object.getOwnPropertyNames', Object.getOwnPropertyNames(obj)); // [ 'name', 'size', 'enum0', 'enum1' ]
 
-  /**
-   * hasOwnProperty 判断属性是否是对象的自身属性（定义后，再自定义的属性），不包括原型对象
-   */
   console.log(obj.hasOwnProperty('name')); // true
-  console.log(obj.hasOwnProperty('age')); // true
+  console.log(obj.hasOwnProperty('enum0')); // true
   console.log(obj.hasOwnProperty('prop1')); // false
   console.log(obj.hasOwnProperty('prop2')); // false
 }
 
 
+/**
+ * Object.create 创建对象并设置对象的原型对象
+ */
 if (0) {
-  var obj1 = { a: 1 }
-  var obj2 = Object.create(obj1)
-  // console.log(obj1 === Object(obj1)) // true
-  // console.log(obj1 !== obj2) // true
-  // console.log(obj2.__proto__ === obj1) // true
+  var parent = { a: 1 }
+  var child = Object.create(obj1)
+  // console.log(child.__proto__ === parent) // true
 }
 
+
+/**
+ * Object.defineProperty 设置对象属性
+ */
 if (0) {
   let object1 = {}
 
   // 等同于 Reflect.defineProperty(obj,propKey, handler)
   Object.defineProperty(object1, 'property1', {
-    value: 42,
-    writable: false, // 可写
-    enumerable: false, // 可枚举
-    configurable: false, // 是否可删除
+    value: 42, // 默认值
+    writable: false, // 不可写
+    enumerable: false, // 不可枚举
+    configurable: false, // 不可删除
     set: undefined,
     get: undefined,
   })
@@ -82,17 +94,26 @@ if (0) {
   // expected output: 42
 }
 
+
+/**
+ * Reflect.defineProperty
+ */
 if (0) {
   try {
     Object.defineProperty({}, Symbol.a, {})
   } catch (e) {
-    console.log('e', e)
+    log('e', e)
   }
-  console.log(Reflect.defineProperty({}, Symbol.a, { value: 1 }))
+  // 返回是否设置成功
+  log('Reflect.defineProperty', Reflect.defineProperty({}, Symbol.a, { value: 1 }))
 }
 
+
+/**
+ * Proxy 结合 Reflect 实现观察者模式
+ * Proxy 实现数据观察，Reflect 实现数据修改。
+ */
 if (0) {
-  // Proxy 结合 Reflect 实现观察者模式，Proxy 实现数据观察，Reflect 实现数据修改。
   // target === obj
   // 只有操作 Proxy 返回的实例，才会触发 Proxy 内的回调
   let obj = { b: 2 }

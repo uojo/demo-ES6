@@ -1,9 +1,10 @@
-/* eslint-disable no-inner-declarations */
-/* eslint-disable no-proto */
+
+/**
+ * 构造函数继承：构造实例时执行另一个构造函数
+ * 优：继承了父类的属性
+ * 劣：没有继承父类的原型对象
+ */
 if (0) {
-  // 借用构造函数
-  // 优点：构造时可以传参给父类
-  // 缺点：没有继承父类原型对象内的属性、方法
   function Animal(name) {
     this.name = name
     this.colors = ['red', 'blue', 'green']
@@ -19,29 +20,37 @@ if (0) {
     this.age = age
   }
 
-  let obj1 = new Cat()
-  console.log(obj1 instanceof Cat) // true
-  console.log(obj1 instanceof Animal) // false。父类不在子类实例的原型链上
-  console.log(obj1.prototype) // undefined。没有原型对象
+  let catA = new Cat()
+  console.log(Object.keys(catA)); // [ 'name', 'colors', 'age' ]
+  console.log(catA instanceof Cat) // true
+  console.log(catA instanceof Animal) // false。父类不在子类实例的原型链上
+  console.log(catA.prototype) // undefined。没有原型对象
 }
 
+/**
+ * 原型式继承：设置原型对象
+ * 优点：实现了原型链
+ * 缺点：无法继承父类的属性
+ */
 if (0) {
-  // 原型式继承
-  // 优点：简单（使用时，自己不必创建构造函数）
-  // 缺点：不能传参、不能共享属性
+  const animal = { name: '' }
 
-  // Object.create(obj, extraProps)
-  function myExtend(obj) {
-    function Fn() {
+  // 方式一
+  const catA = Object.create(animal, { size: { value: 1 } })
+  console.log('catA', catA.size); // 1
+  console.log('catA', catA.__proto__ === animal); // true
 
-    }
-    Fn.prototype = obj
-    return new Fn()
-  }
+  // 方式二
+  function Cat() { }
+  Cat.prototype = animal
+  const catB = new Cat()
+  console.log('catB', Object.keys(catB));
 }
 
+/**
+ * 寄生继承。简单且不考虑原型链时使用
+ */
 if (0) {
-  // 寄生继承。简单且不考虑原型链
   function createAnother(original) {
     // 创建一个新对象，对象的原型指向父对象，这样实现了继承父对象的属性和方法。
     var clone = Object.create(original)
@@ -62,10 +71,12 @@ if (0) {
   // console.log(cat.__proto__) // animal{...}
 }
 
+/**
+ * 组合继承。既在构造函数内执行父类构造函数，也将父类实例作为子类的原型对象
+ * 优点：同时继承了父类的属性和原型对象
+ * 缺点：子类的原型对象上存在父类的实例属性
+ */
 if (0) {
-  // 组合继承
-  // 优点：同【借用构造函数】、继承了方法
-  // 缺点：以父类的实例作为子类的原型对象，导致子类的原型对象被污染了。
   function Animal(name) {
     this.name = name
     this.colors = ['red', 'blue', 'green']
@@ -92,8 +103,10 @@ if (0) {
   console.log(obj1 instanceof Animal) // true
 }
 
+/**
+ * 寄生组合继承
+ */
 if (0) {
-  // 寄生组合继承
   function Animal(name) {
     this.name = name
     this.colors = ['red', 'blue', 'green']
