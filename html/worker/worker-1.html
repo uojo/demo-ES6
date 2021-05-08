@@ -1,0 +1,22 @@
+Worker 应用场景：
+<li>轮询获取服务端状态，变更后在通知主线程。</li>
+<li>需要密集计算，花费较多时间的代码放置在 worker 中</li>
+
+<button></button>
+
+<script>
+  console.log('main-start');
+  const payload = { a: 1 }
+  const worker = new Worker('./worker-1.js')
+  worker.postMessage('hi');
+  worker.postMessage({ cmd: 'start', msg: ['hello', 'world'] });
+  worker.postMessage({ payload })
+  worker.onmessage = function (event) {
+    console.log('Received message ', event.data);
+    if (event.data.payload) {
+      console.log('Received payload ', event.data.payload === payload); // false
+    }
+  }
+
+  // worker.terminate(); // 关闭
+</script>
