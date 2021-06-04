@@ -64,10 +64,16 @@ if (0) {
 /**
  * Object.create 创建对象并设置对象的原型对象
  */
-if (0) {
+if (1) {
   var parent = { a: 1 }
-  var child = Object.create(obj1)
+  var child = Object.create(parent)
   // console.log(child.__proto__ === parent) // true
+
+  var pFunc = function () { }
+  pFunc.a = 1
+  var cFunc = Object.create(pFunc)
+  // console.log('cFunc.a: ', cFunc.a); // 1
+  console.log('cFunc.a: ', cFunc); // 1
 }
 
 
@@ -116,8 +122,8 @@ if (0) {
 if (0) {
   // target === obj
   // 只有操作 Proxy 返回的实例，才会触发 Proxy 内的回调
-  let obj = { b: 2 }
-  let proxy = new Proxy(obj, {
+  let obj = { a: 1, c: { e: 100, method: function () { } } }
+  let proxyObj = new Proxy(obj, {
     set(target, prop, value, context) {
       // 使用 Reflect 的目的：确保对象的属性赋值成功，除非 target 不是对象
       return Reflect.set(target, prop, value, context)
@@ -126,12 +132,22 @@ if (0) {
       // console.log(target === obj); // true
       console.log('get => ', prop) // a
       // console.log('get -> target, prop, context', target, prop, context)
-      return Reflect.get(target, prop)
+      return target[prop]
+      // return Reflect.get(target, prop)
     }
   })
-  // console.log("proxy.b", proxy.b)
 
-  proxy.a = 1 // 触发 set 回调
-  console.log("proxy.a", proxy.a) // 1，触发 get 回调
-  console.log("obj.a", obj.a) // 1，获取到最新数据
+  proxyObj.b = 2 // 触发 set 回调
+  console.log("proxyObj.b", proxyObj.b) // 2，触发 get 回调
+  console.log("obj.b", obj.b) // 2，获取到最新数据
+
+  console.log('proxyObj.c.e', proxyObj.c.e); // 100
+  proxyObj.c.e = 200
+  console.log('proxyObj.c.e', proxyObj.c.e); // 200
+
+  console.log(proxyObj.c.method.enabled);
+  proxyObj.c.method.enabled = true
+  console.log(proxyObj.c.method.enabled);
 }
+
+

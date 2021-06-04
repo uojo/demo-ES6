@@ -1,0 +1,22 @@
+<div id="message"></div>
+<button id="button">click</button>
+
+<script>
+  var ele = document.getElementById("button");
+  ele.addEventListener('click', function () {
+    var then = Date.now()
+    var i = 0
+    var el = document.getElementById('message')
+    while (true) {
+      var now = Date.now()
+      if (now - then > 1000) {
+        if (i++ >= 5) {
+          break;
+        }
+        el.innerText += 'hello!\n'
+        console.log(i)
+        then = now
+      }
+    }
+
+  })

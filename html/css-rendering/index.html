@@ -1,0 +1,68 @@
+<style>
+  html,
+  body {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  html {
+    /* background-color: #ddd; */
+  }
+
+  body {
+    /* border: 1px solid #000; */
+  }
+
+  .box {
+    background-color: #ccc;
+    width: 60px;
+    height: 60px;
+  }
+
+  .posA {
+    position: absolute;
+  }
+
+  .tf0 {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    /**或者**/
+    /* transform: rotateZ(360deg); */
+    /* transform: translate3d(0, 0, 0); */
+  }
+</style>
+请先打开 DevTools - Rendering 工具，并勾选 Layer borders 选项。将会看到页面上的元素被淡黄色变黄包裹，表示为一个渲染层。
+页面的主体内容基本都在第一个渲染层中，所以整个窗口会标记有黄线。
+<ul>
+  <li>3独立存在于一个渲染层。</li>
+  <li>4与5将会存在于同一个渲染层。因为4满足三个条件：被放入独立渲染层、z-index小于兄弟节点、与兄弟节点有交集。</li>
+</ul>
+
+
+<div class="box">1</div>
+<div class="box posA" style="top: 10px; right: 10px; z-index: 2;">2</div>
+<div class="box posA tf0" style="background:green; top: 10px; right: 50px; z-index: 3; opacity: 0.5;">3*</div>
+
+<div class="box posA tf0" style="top:110px; right: 10px; z-index: 4;">4*</div>
+<div class="box posA" style="background:hotpink; top:110px; right: 50px; z-index: 5; opacity: 0.5;">5</div>
+
+<div class="box posA" style="top:210px; right:10px;">7
+  <div class="tf0" style="width:20px; height:20px; background: #ccc;">6*</div>
+  <span class="" style="width:20px; height:20px; background: #ccc;">兄弟</span>
+</div>
+
+<div class="box posA tf0" style="top:310px; right:10px;">8*
+  <div class="" style="width:20px; height:20px; background: #ccc;">9</div>
+</div>
+
+<video style="width: 100px; height:100px;" src="https://www.w3school.com.cn/i/movie.mp4"></video>
+<iframe style="width: 100px; height:100px; border:0;" src="https://www.baidu.com"></iframe>
+<img style="display:block; max-width: 100px; max-height:100px;"
+  src="https://cdn.segmentfault.com/r-a088bedb/static/logo-b.d865fc97.svg" />
+<img style="display:block; max-width: 100px; max-height:100px;"
+  src="https://www.baidu.com/img/flexible/logo/pc/result@2.png" />
+
+<div style="position: fixed; bottom: 10px; right: 10px; background: #ccc;">fixed</div>

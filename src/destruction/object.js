@@ -5,7 +5,7 @@
       // 别名，默认值
       c: c0 = 30,
       c1 = 10,
-      d: {e = 20}
+      d: { e = 20 }
     }
   } = {
     a: 1,
@@ -17,13 +17,13 @@
     }
   }
 
-  // console.log('TCL: a, c0, c1, e', a, c0, c1, e)
+  // console.log('a, c0, c1, e', a, c0, c1, e)
   // > 1 3 10 {f:{...}}
 
   try {
-    // console.log('TCL: b', b)
+    // console.log('b', b)
   } catch (err) {
-    // console.log('TCL: catch -> err', err)
+    // console.log('catch -> err', err)
     // > b is not defined
   }
 })()

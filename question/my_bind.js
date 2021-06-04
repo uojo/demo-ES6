@@ -90,7 +90,7 @@ Function.prototype.mybind = function () {
   const args = Array.prototype.slice.call(arguments, 1)
   let context = arguments[0]
   function rltFn() {
-    const key = Symbol()
+    const key = Symbol() // 生成独一无二的值
     context = this instanceof rltFn ? this : context // 应用于构造函数时，this 指向函数本身
     context[key] = fn
     context[key](...args.concat(arguments)) // 可以替换为 fn.apply(context,args.concat(arguments))
@@ -106,7 +106,7 @@ Function.prototype.mybind = function () {
 Function.prototype.mycall = function () {
   const context = arguments[0]
   const args = Array.prototype.slice.call(arguments, 1)
-  console.log('Function.prototype.mycall -> args', context, args)
+  // console.log('Function.prototype.mycall -> args', context, args)
   const fn = this
   context._fn = fn
   context._fn(...args)

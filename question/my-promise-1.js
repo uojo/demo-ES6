@@ -1,21 +1,19 @@
-// 手写 promise 类
-
 /**
- * 
+ * 手写 promise 类
  * @param {*} cb 
  */
-function PromiseA(cb) {
+function MyPromise(cb) {
   const self = this
   let state = 'pending'
-  let cbs = []
+  let thenCallbacks = []
   let resCache = undefined
 
   // 实现：将回调入栈；判断是否执行 resolve
   self.then = function (cb) {
     console.log('then');
-    cbs.push(cb)
+    thenCallbacks.push(cb)
     if (state === 'fulfilled') {
-      resolve(resCache)
+      resolve(resCache) // 难点1：入参取最近一次 then 的返回值
     }
     return self
   }
@@ -25,10 +23,10 @@ function PromiseA(cb) {
     console.log('resolve', res);
     state = 'fulfilled'
     resCache = res
-    // console.log('resolve', cbs.length);
-    if (cbs.length > 0) {
-      let r = cbs.shift()(res)
-      resolve(r)
+    // console.log('resolve', thenCallbacks.length);
+    if (thenCallbacks.length > 0) {
+      let r = thenCallbacks.shift()(res)
+      resolve(r) // 难点2：递归
     }
   }
 
@@ -37,7 +35,7 @@ function PromiseA(cb) {
 }
 
 
-const PromiseClass = Promise || PromiseA
+const PromiseClass = Promise || MyPromise
 
 new PromiseClass((resolve, reject) => {
   // setTimeout(() => {

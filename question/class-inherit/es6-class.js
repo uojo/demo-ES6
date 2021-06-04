@@ -3,13 +3,13 @@
 if (0) {
   // 属性与方法
   class Animal {
-    constructor (name) {
+    constructor(name) {
       this.name = name
     }
-    color () {
+    color() {
       console.log('Animal.methods.color')
     }
-    say () {
+    say() {
       return `Hi,${this.name}`
     }
   }
@@ -19,15 +19,15 @@ if (0) {
   // 继承
   class Cat extends Animal {
     // eslint-disable-next-line no-useless-constructor
-    constructor (name) {
+    constructor(name) {
       // 调用父类的 constructor(name)
       super(name)
       // 如果在此方法内仅执行 super(name)，是无意义的，lint会提示错误。而且如果需要在此使用 this，也必须在执行 super
-      // console.log('TCL: Cat -> constructor -> this.name', this.name)
+      // console.log('Cat -> constructor -> this.name', this.name)
       // 调用父类方法
       // super.color()
     }
-    say () {
+    say() {
       // return `Meow,${this.name}`
     }
   }
@@ -40,16 +40,16 @@ if (0) {
 
 if (0) {
   class Animal {
-    constructor () {
+    constructor() {
     }
-    static logNbSides () {
+    static logNbSides() {
       return 'I have 4 sides'
     }
   }
 
   class Cat extends Animal {
-    constructor () {}
-    static logDescription () {
+    constructor() { }
+    static logDescription() {
       return super.logNbSides() + ' which are all equal'
     }
   }
@@ -58,13 +58,13 @@ if (0) {
 
 if (0) {
   class Animal {
-    constructor () {
+    constructor() {
     }
-    say () {}
+    say() { }
   }
 
   class Cat extends Animal {
-    go () {}
+    go() { }
   }
 
   const obj1 = new Cat()
