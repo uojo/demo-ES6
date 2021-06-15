@@ -14,17 +14,17 @@
   </div>
 
   <script>
-    function observe(obj, vm) {
-      Object.keys(obj).forEach(function (key) {
-        defineReactive(vm, key, obj[key]);
+    function observe(data, vm) {
+      Object.keys(data).forEach(function (key) {
+        defineReactive(vm, key, data[key]);
       })
     }
 
-    function defineReactive(obj, key, val) {
-      // console.log("defineReactive -> obj, key, val", obj, key, val)
+    function defineReactive(vm, key, val) {
+      // console.log("defineReactive -> vm, key, val", vm, key, val)
       var dep = new Dep();
 
-      Object.defineProperty(obj, key, {
+      Object.defineProperty(vm, key, {
         get: function () {
           // console.log("get", val);
           // 添加订阅者 watcher 到主题对象 Dep
@@ -42,7 +42,7 @@
     }
 
     function nodeToFragment(node, vm) {
-      var flag = document.createDocumentFragment();
+      var flag = document.createDocumentFragment(); // 创建一个虚拟的DOM对象
       var child;
       // 许多同学反应看不懂这一段，这里有必要解释一下
       // 首先，所有表达式必然会返回一个值，赋值表达式亦不例外

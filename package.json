@@ -10,6 +10,7 @@
     "babel-plugin-transform-es2015-spread": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.26.14",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-node": "^6.0.1",
@@ -23,7 +24,8 @@
   "scripts": {
     "watch": "webpack --progress --colors --watch",
     "start": "webpack-dev-server",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "dev:file": "node scripts/browser_sync.js"
   },
   "author": "uojo",
   "license": "ISC",
