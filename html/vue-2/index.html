@@ -10,8 +10,10 @@
 <body>
   <!-- app -->
   <div id="app">
+    World
     <h1>{{title}}</h1>
-    <div>a{{now}}b</div>
+    <span v-if="title">a{{now}}b</span>
+    <div v-for="item in level" :key="item">{{item}}</div>
   </div>
 
   <script>
@@ -20,6 +22,7 @@
       data: {
         title: 'hi',
         now: Date.now(),
+        level: [10, 20]
         // nums: {
         //   first: 1,
         //   second: 2
