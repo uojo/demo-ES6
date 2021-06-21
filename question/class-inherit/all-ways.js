@@ -106,7 +106,7 @@ if (0) {
 /**
  * 寄生组合继承
  */
-if (0) {
+if (1) {
   function Animal(name) {
     this.name = name
     this.colors = ['red', 'blue', 'green']
